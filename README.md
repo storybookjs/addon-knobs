@@ -1,106 +1,536 @@
-# Storybook Addon Kit
+# Storybook Addon Knobs
 
-Simplify the creation of Storybook addons
+Storybook Addon Knobs allow you to edit props dynamically using the Storybook UI.
+You can also use Knobs as a dynamic variable inside stories in [Storybook](https://storybook.js.org).
 
-- 📝 Live-editing in development
-- ⚛️ React/JSX support
-- 📦 Transpiling and bundling with Babel
-- 🏷 Plugin metadata
-- 🚢 Release management with [Auto](https://github.com/intuit/auto)
-- 🧺 Boilerplate and sample code
+[Framework Support](https://github.com/storybookjs/storybook/blob/master/ADDONS_SUPPORT.md).
+
+This is what Knobs looks like:
+
+[![Storybook Knobs Demo](docs/storybook-knobs-example.png)](https://storybooks-official.netlify.com/?knob-Dollars=12.5&knob-Name=Storyteller&knob-Years%20in%20NY=9&knob-background=%23ffff00&knob-Age=70&knob-Items%5B0%5D=Laptop&knob-Items%5B1%5D=Book&knob-Items%5B2%5D=Whiskey&knob-Other%20Fruit=lime&knob-Birthday=1484870400000&knob-Nice=true&knob-Styles=%7B%22border%22%3A%223px%20solid%20%23ff00ff%22%2C%22padding%22%3A%2210px%22%7D&knob-Fruit=apple&selectedKind=Addons%7CKnobs.withKnobs&selectedStory=tweaks%20static%20values&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybooks%2Fstorybook-addon-knobs)
+
+> Checkout the above [Live Storybook](https://storybooks-official.netlify.com/?knob-Dollars=12.5&knob-Name=Storyteller&knob-Years%20in%20NY=9&knob-background=%23ffff00&knob-Age=70&knob-Items%5B0%5D=Laptop&knob-Items%5B1%5D=Book&knob-Items%5B2%5D=Whiskey&knob-Other%20Fruit=lime&knob-Birthday=1484870400000&knob-Nice=true&knob-Styles=%7B%22border%22%3A%223px%20solid%20%23ff00ff%22%2C%22padding%22%3A%2210px%22%7D&knob-Fruit=apple&selectedKind=Addons%7CKnobs.withKnobs&selectedStory=tweaks%20static%20values&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybooks%2Fstorybook-addon-knobs) or [watch this video](https://www.youtube.com/watch?v=kopW6vzs9dg&feature=youtu.be).
 
 ## Getting Started
 
-Click the **Use this template** button to get started.
-
-![](https://user-images.githubusercontent.com/42671/106809879-35b32000-663a-11eb-9cdc-89f178b5273f.gif)
-
-Clone your repository and install dependencies.
+First of all, you need to install Knobs into your project as a dev dependency.
 
 ```sh
-npm install
+yarn add @storybook/addon-knobs --dev
 ```
 
-### Development scripts
+within `.storybook/main.js`:
 
-- `npm run start` runs babel in watch mode and starts Storybook
-- `npm run build` build and package your addon code
-
-## What's included?
-
-![Demo](https://user-images.githubusercontent.com/42671/107857205-e7044380-6dfa-11eb-8718-ad02e3ba1a3f.gif)
-
-The addon code lives in `src`. It demonstrates all core addon related concepts. The three [UI paradigms](https://storybook.js.org/docs/react/addons/addon-types#ui-based-addons)
-
-- `src/Tool.js`
-- `src/Panel.js`
-- `src/Tab.js`
-
-Which, along with the addon itself, are registered in `src/preset/manager.js`.
-
-Managing State and interacting with a story:
-
-- `src/withGlobals.js` & `src/Tool.js` demonstrates how to use `useGlobals` to manage global state and modify the contents of a Story.
-- `src/withRoundTrip.js` & `src/Panel.js` demonstrates two-way communication using channels.
-- `src/Tab.js` demonstrates how to use `useParameter` to access the current story's parameters.
-
-Your addon might use one or more of these patterns. Feel free to delete unused code. Update `src/preset/manager.js` and `src/preset/preview.js` accordingly.
-
-Lastly, configure you addon name in `src/constants.js`.
-
-### Metadata
-
-Storybook addons are listed in the [catalog](https://storybook.js.org/addons) and distributed via npm. The catalog is populated by querying npm's registry for Storybook-specific metadata in `package.json`. This project has been configured with sample data. Learn more about available options in the [Addon metadata docs](https://storybook.js.org/docs/react/addons/addon-catalog#addon-metadata).
-
-## Release Management
-
-### Setup
-
-This project is configured to use [auto](https://github.com/intuit/auto) for release management. It generates a changelog and pushes it to both GitHub and npm. Therefore, you need to configure access to both:
-
-- [`NPM_TOKEN`](https://docs.npmjs.com/creating-and-viewing-access-tokens#creating-access-tokens) Create a token with both _Read and Publish_ permissions.
-- [`GH_TOKEN`](https://github.com/settings/tokens) Create a token with the `repo` scope.
-
-Then open your `package.json` and edit the following fields:
-
-- `name`
-- `author`
-- `repository`
-
-#### Local
-
-To use `auto` locally create a `.env` file at the root of your project and add your tokens to it:
-
-```bash
-GH_TOKEN=<value you just got from GitHub>
-NPM_TOKEN=<value you just got from npm>
+```js
+module.exports = {
+  addons: ['@storybook/addon-knobs'],
+};
 ```
 
-Lastly, **create labels on GitHub**. You’ll use these labels in the future when making changes to the package.
+Now, write your stories with Knobs.
 
-```bash
-npx auto create-labels
+### With React
+
+```js
+import React from 'react';
+import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
+
+export default {
+  title: 'Storybook Knobs',
+  decorators: [withKnobs],
+};
+// Add the `withKnobs` decorator to add knobs support to your stories.
+// You can also configure `withKnobs` as a global decorator.
+
+// Knobs for React props
+export const withAButton = () => (
+  <button disabled={boolean('Disabled', false)}>{text('Label', 'Hello Storybook')}</button>
+);
+
+// Knobs as dynamic variables.
+export const asDynamicVariables = () => {
+  const name = text('Name', 'James');
+  const age = number('Age', 35);
+  const content = `I am ${name} and I'm ${age} years old.`;
+
+  return <div>{content}</div>;
+};
 ```
 
-If you check on GitHub, you’ll now see a set of labels that `auto` would like you to use. Use these to tag future pull requests.
+### With Vue.js
 
-#### GitHub Actions
+MyButton.story.js:
 
-This template comes with GitHub actions already set up to publish your addon anytime someone pushes to your repository.
+```js
+import { storiesOf } from '@storybook/vue';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 
-Go to `Settings > Secrets`, click `New repository secret`, and add your `NPM_TOKEN`.
+import MyButton from './MyButton.vue';
 
-### Creating a releasing
+export default {
+  title: 'Storybook Knobs',
+  decorators: [withKnobs],
+};
 
-To create a release locally you can run the following command, otherwise the GitHub action will make the release for you.
+// Assign `props` to the story's component, calling
+// knob methods within the `default` property of each prop,
+// then pass the story's prop data to the component’s prop in
+// the template with `v-bind:` or by placing the prop within
+// the component’s slot.
+export const exampleWithKnobs = () => ({
+  components: { MyButton },
+  props: {
+    isDisabled: {
+      default: boolean('Disabled', false),
+    },
+    text: {
+      default: text('Text', 'Hello Storybook'),
+    },
+  },
+  template: `<MyButton :isDisabled="isDisabled">{{ text }}</MyButton>`,
+});
+```
+
+MyButton.vue:
+
+```vue
+<template>
+  <button :disabled="isDisabled">
+    <slot></slot>
+  </button>
+</template>
+
+<script>
+export default {
+  props: {
+    isDisabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
+};
+</script>
+```
+
+### With Angular
+
+```js
+import { storiesOf } from '@storybook/angular';
+import { boolean, number, text, withKnobs } from '@storybook/addon-knobs';
+
+import { Button } from '@storybook/angular/demo';
+
+export default {
+  title: 'Storybook Knobs',
+  decorators: [withKnobs],
+};
+
+export const withKnobs = () => ({
+  component: Button,
+  props: {
+    text: text('text', 'Hello Storybook'), // The first param of the knob function has to be exactly the same as the component input.
+  },
+});
+```
+
+### With Ember
+
+```js
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { hbs } from 'ember-cli-htmlbars';
+
+export default {
+  title: 'StoryBook with Knobs',
+  decorators: [withKnobs],
+};
+
+export const button = () => ({
+  template: hbs`
+    <button disabled={{disabled}}>{{label}}</button>
+  `,
+  context: {
+    label: text('label', 'Hello Storybook'),
+    disabled: boolean('disabled', false),
+  },
+});
+```
+
+## Categorization
+
+Categorize your Knobs by assigning them a `groupId`. When a `groupId` exists, tabs will appear in the Knobs storybook panel to filter between the groups. Knobs without a `groupId` are automatically categorized into the `ALL` group.
+
+```js
+export const inGroups = () => {
+  const personalGroupId = 'personal info';
+  const generalGroupId = 'general info';
+
+  const name = text('Name', 'James', personalGroupId);
+  const age = number('Age', 35, { min: 0, max: 99 }, personalGroupId);
+  const message = text('Hello!', 35, generalGroupId);
+  const content = `
+    I am ${name} and I'm ${age} years old.
+    ${message}
+  `;
+
+  return <div>{content}</div>;
+};
+```
+
+You can see your Knobs in a Storybook panel as shown below.
+
+![](docs/demo.png)
+
+## Available Knobs
+
+These are the Knobs available for you to use. You can import these Knobs from the `@storybook/addon-knobs` module.
+Here's how to import the **text** Knob.
+
+```js
+import { text } from '@storybook/addon-knobs';
+```
+
+Just like that, you can import any other following Knobs:
+
+### text
+
+Allows you to get some text from the user.
+
+```js
+import { text } from '@storybook/addon-knobs';
+
+const label = 'Your Name';
+const defaultValue = 'James';
+const groupId = 'GROUP-ID1';
+
+const value = text(label, defaultValue, groupId);
+```
+
+### boolean
+
+Allows you to get a boolean value from the user.
+
+```js
+import { boolean } from '@storybook/addon-knobs';
+
+const label = 'Agree?';
+const defaultValue = false;
+const groupId = 'GROUP-ID1';
+
+const value = boolean(label, defaultValue, groupId);
+```
+
+### number
+
+Allows you to get a number from the user.
+
+```js
+import { number } from '@storybook/addon-knobs';
+
+const label = 'Age';
+const defaultValue = 78;
+const groupId = 'GROUP-ID1';
+
+const value = number(label, defaultValue);
+```
+
+For use with `groupId`, pass the default `options` as the third argument.
+
+```js
+const value = number(label, defaultValue, {}, groupId);
+```
+
+### number bound by range
+
+Allows you to get a number from the user using a range slider.
+
+```js
+import { number } from '@storybook/addon-knobs';
+
+const label = 'Temperature';
+const defaultValue = 73;
+const options = {
+  range: true,
+  min: 60,
+  max: 90,
+  step: 1,
+};
+const groupId = 'GROUP-ID1';
+
+const value = number(label, defaultValue, options, groupId);
+```
+
+### color
+
+Allows you to get a colour from the user.
+
+```js
+import { color } from '@storybook/addon-knobs';
+
+const label = 'Color';
+const defaultValue = '#ff00ff';
+const groupId = 'GROUP-ID1';
+
+const value = color(label, defaultValue, groupId);
+```
+
+### object
+
+Allows you to get a JSON object or array from the user.
+
+```js
+import { object } from '@storybook/addon-knobs';
+
+const label = 'Styles';
+const defaultValue = {
+  backgroundColor: 'red',
+};
+const groupId = 'GROUP-ID1';
+
+const value = object(label, defaultValue, groupId);
+```
+
+> Make sure to enter valid JSON syntax while editing values inside the knob.
+
+### array
+
+Allows you to get an array of strings from the user.
+
+```js
+import { array } from '@storybook/addon-knobs';
+
+const label = 'Styles';
+const defaultValue = ['Red'];
+const groupId = 'GROUP-ID1';
+
+const value = array(label, defaultValue);
+```
+
+> While editing values inside the knob, you will need to use a separator.
+> By default it is a comma, but this can be overridden by passing a separator variable.
+>
+> ```js
+> import { array } from '@storybook/addon-knobs';
+>
+> const label = 'Styles';
+> const defaultValue = ['Red'];
+> const separator = ':';
+> const value = array(label, defaultValue, separator);
+> ```
+
+For use with `groupId`, pass the default `separator` as the third argument.
+
+```js
+const value = array(label, defaultValue, ',', groupId);
+```
+
+### select
+
+It allows you to get a value from a select box from the user.
+
+```js
+import { select } from '@storybook/addon-knobs';
+
+const label = 'Colors';
+const options = {
+  Red: 'red',
+  Blue: 'blue',
+  Yellow: 'yellow',
+  Rainbow: ['red', 'orange', 'etc'],
+  None: null,
+};
+const defaultValue = 'red';
+const groupId = 'GROUP-ID1';
+
+const value = select(label, options, defaultValue, groupId);
+```
+
+Options can also be an array:
+
+```js
+import { select } from '@storybook/addon-knobs';
+const label = 'Cats';
+const options = ['linus', 'eleanor', 'lover'];
+const defaultValue = 'eleanor';
+const groupId = 'GROUP-ID2';
+const value = select(label, options, defaultValue, groupId);
+```
+
+Options can also be an array OF objects:
+
+```js
+const label = 'Dogs';
+const arrayOfObjects = [
+  {
+    label: 'Sparky',
+    dogParent: 'Matthew',
+    location: 'Austin',
+  },
+  {
+    label: 'Juniper',
+    dogParent: 'Joshua',
+    location: 'Austin',
+  },
+];
+const defaultValue = arrayOfObjects[0];
+const groupId = 'GROUP-ID3';
+const value = select(label, arrayOfObjects, defaultValue, groupId);
+```
+
+### radio buttons
+
+It allows you to get a value from a list of radio buttons from the user.
+
+```js
+import { radios } from '@storybook/addon-knobs';
+
+const label = 'Fruits';
+const options = {
+  Kiwi: 'kiwi',
+  Guava: 'guava',
+  Watermelon: 'watermelon',
+};
+const defaultValue = 'kiwi';
+const groupId = 'GROUP-ID1';
+
+const value = radios(label, options, defaultValue, groupId);
+```
+
+### options
+
+Configurable UI for selecting a value from a set of options.
+
+```js
+import { optionsKnob } from '@storybook/addon-knobs';
+
+const label = 'Fruits';
+const valuesObj = {
+  Kiwi: 'kiwi',
+  Guava: 'guava',
+  Watermelon: 'watermelon',
+};
+const defaultValue = 'kiwi';
+const optionsObj = {
+  display: 'inline-radio',
+};
+const groupId = 'GROUP-ID1';
+
+const value = optionsKnob(label, valuesObj, defaultValue, optionsObj, groupId);
+```
+
+Alternatively you can use this import:
+```
+import { optionsKnob as options } from '@storybook/addon-knobs';
+
+...
+
+const value = options(label, valuesObj, defaultValue, optionsObj, groupId);
+```
+
+> The display property for `optionsObj` accepts:
+>
+> - `radio`
+> - `inline-radio`
+> - `check`
+> - `inline-check`
+> - `select`
+> - `multi-select`
+
+### files
+
+It allows you to get a value from a file input from the user.
+
+```js
+import { files } from '@storybook/addon-knobs';
+
+const label = 'Images';
+const accept = '.xlsx, .pdf';
+const defaultValue = [];
+const groupId = 'GROUP-ID1';
+
+const value = files(label, accept, defaultValue, groupId);
+```
+
+> You can optionally specify a [list of file types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept) which the file input should accept.
+> Multiple files can be selected, and will be returned as an array of [Data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs).
+
+### date
+
+Allows you to get date (and time) from the user.
+
+```js
+import { date } from '@storybook/addon-knobs';
+
+const label = 'Event Date';
+const defaultValue = new Date('Jan 20 2017');
+const groupId = 'GROUP-ID1';
+
+const value = date(label, defaultValue, groupId);
+```
+
+> Note: the default value must not change - e.g., do not do `date('Label', new Date())` or `date('Label')`.
+
+The `date` knob returns the selected date as stringified Unix timestamp (e.g. `"1510913096516"`).
+If your component needs the date in a different form you can wrap the `date` function:
+
+```js
+function myDateKnob(name, defaultValue) {
+  const stringTimestamp = date(name, defaultValue);
+  return new Date(stringTimestamp);
+}
+```
+
+### button
+
+It allows you to include a button and associated handler.
+
+```js
+import { button } from '@storybook/addon-knobs';
+
+const label = 'Do Something';
+const handler = () => doSomething('foobar');
+const groupId = 'GROUP-ID1';
+
+button(label, handler, groupId);
+```
+
+Button knobs cause the story to re-render after the handler fires.
+You can prevent this by having the handler return `false`.
+
+### withKnobs options
+
+withKnobs also accepts two optional options as story parameters.
+Usage:
+
+```js
+import { withKnobs } from '@storybook/addon-knobs';
+
+export default {
+  title: 'Storybook Knobs',
+  decorators: [withKnobs],
+};
+
+export const defaultView = () => <div />;
+defaultView.parameters = {
+  knobs: {
+    // Doesn't emit events while user is typing.
+    timestamps: true,
+
+    // Escapes strings to be safe for inserting as innerHTML. This option is true by default. It's safe to set it to `false` with frameworks like React which do escaping on their side.
+    // You can still set it to false, but it's strongly discouraged to set to true in cases when you host your storybook on some route of your main site or web app.
+    escapeHTML: true,
+  },
+};
+```
+
+## Typescript
+
+If you are using Typescript, make sure you have the type definitions installed for the following libs:
+
+- node
+- react
+
+You can install them using: (_assuming you are using Typescript >2.0._)
 
 ```sh
-npm run release
+yarn add @types/node @types/react --dev
 ```
-
-That will:
-
-- Build and package the addon code
-- Bump the version
-- Push a release to GitHub and npm
-- Push a changelog to GitHub
