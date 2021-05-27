@@ -1,6 +1,6 @@
 {
   "name": "@storybook/addon-knobs",
-  "version": "6.2.9",
+  "version": "6.3.0-next.0",
   "description": "Storybook addon for editing props",
   "keywords": [
     "storybook-addons",
