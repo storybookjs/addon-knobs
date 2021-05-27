@@ -1,4 +1,8 @@
-# Storybook Addon Knobs
+# Storybook Addon Knobs (deprecated)
+
+> We are deprecating Knobs in favor of @storybook/addon-controls.
+>
+> Discussion: https://github.com/storybookjs/storybook/discussions/15060
 
 Storybook Addon Knobs allow you to edit props dynamically using the Storybook UI.
 You can also use Knobs as a dynamic variable inside stories in [Storybook](https://storybook.js.org).
@@ -418,6 +422,7 @@ const value = optionsKnob(label, valuesObj, defaultValue, optionsObj, groupId);
 ```
 
 Alternatively you can use this import:
+
 ```
 import { optionsKnob as options } from '@storybook/addon-knobs';
 
