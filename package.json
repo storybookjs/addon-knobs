@@ -1,17 +1,15 @@
 {
   "name": "@storybook/addon-knobs",
   "version": "0.0.0",
-  "description": "everything you need to build a Storybook addon",
+  "description": "Storybook addon for editing props",
   "keywords": [
     "storybook-addons",
-    "style",
     "test"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/storybookjs/storybook-addon-kit"
+    "url": "https://github.com/storybookjs/addon-knobs.git"
   },
-  "author": "winkerVSbecks",
   "license": "MIT",
   "main": "dist/preset",
   "files": [
@@ -85,12 +83,9 @@
     "access": "public"
   },
   "storybook": {
-    "displayName": "Addon Kit",
-    "supportedFrameworks": [
-      "react",
-      "vue",
-      "angular"
-    ],
-    "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
+    "displayName": "Knobs",
+    "unsupportedFrameworks": [
+      "react-native"
+    ]
   }
 }
