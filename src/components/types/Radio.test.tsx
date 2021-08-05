@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import RadioType from '../types/Radio';
+import RadioType, { RadiosTypeKnob } from '../types/Radio';
 
 describe('Radio', () => {
-  let knob;
+  let knob: RadiosTypeKnob;
 
   beforeEach(() => {
     knob = {
