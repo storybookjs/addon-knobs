@@ -7,21 +7,18 @@ import { ThemeProvider, themes, convert } from '@storybook/theming';
 import Panel, { DEFAULT_GROUP_ID } from '../Panel';
 import { CHANGE, SET } from '../../shared';
 import PropForm from '../PropForm';
+import { API } from '@storybook/api';
 
-const createTestApi = () => ({
+type CreateMocked<Type> = {
+  [Property in keyof Type]: jest.Mock & Type[Property];
+};
+
+const createTestApi = (): CreateMocked<Pick<API, 'on' | 'off' | 'emit' | 'getQueryParam' | 'setQueryParams'>> => ({
   on: jest.fn(() => () => {}),
   off: jest.fn(),
   emit: jest.fn(),
   getQueryParam: jest.fn(() => undefined),
   setQueryParams: jest.fn(),
-});
-
-// React.memo in Tabs is causing problems with enzyme, probably
-// due to https://github.com/airbnb/enzyme/issues/1875, so this
-// is a workaround
-jest.mock('react', () => {
-  const r = jest.requireActual('react');
-  return { ...r, memo: (x) => x };
 });
 
 describe('Panel', () => {
@@ -116,7 +113,7 @@ describe('Panel', () => {
         type: 'text',
       };
       // todo
-      wrapper.instance().handleChange(testChangedKnob);
+      // wrapper.instance().handleChange(testChangedKnob);
       expect(testApi.emit).toHaveBeenCalledWith(CHANGE, testChangedKnob);
 
       // const paramsChange = { 'knob-foo': 'changed text' };
@@ -145,32 +142,32 @@ describe('Panel', () => {
         </ThemeProvider>
       );
 
-      testApi.on.mock.calls[0][1]({
-        knobs: {
-          foo: {
-            name: 'foo',
-            defaultValue: 'test',
-            used: true,
-            // no groupId
-          },
-          bar: {
-            name: 'bar',
-            defaultValue: 'test2',
-            used: true,
-            // no groupId
-          },
-        },
-      });
+      // testApi.on.mock.calls[0][1]({
+      //   knobs: {
+      //     foo: {
+      //       name: 'foo',
+      //       defaultValue: 'test',
+      //       used: true,
+      //       // no groupId
+      //     },
+      //     bar: {
+      //       name: 'bar',
+      //       defaultValue: 'test2',
+      //       used: true,
+      //       // no groupId
+      //     },
+      //   },
+      // });
 
-      root.rerender();
-      const wrapper = root.find(Panel);
+      // root.rerender();
+      // const wrapper = root.find(Panel);
 
-      const formWrapper = wrapper.find(PropForm);
-      const knobs = formWrapper.map((formInstanceWrapper) => formInstanceWrapper.prop('knobs'));
+      // const formWrapper = wrapper.find(PropForm);
+      // const knobs = formWrapper.map((formInstanceWrapper) => formInstanceWrapper.prop('knobs'));
 
-      expect(knobs).toMatchSnapshot();
+      // expect(knobs).toMatchSnapshot();
 
-      root.unmount();
+      // root.unmount();
     });
 
     it.skip('should have one tab per groupId when all are defined', () => {
@@ -180,37 +177,37 @@ describe('Panel', () => {
         </ThemeProvider>
       );
 
-      testApi.on.mock.calls[0][1]({
-        knobs: {
-          foo: {
-            name: 'foo',
-            defaultValue: 'test',
-            used: true,
-            groupId: 'foo',
-          },
-          bar: {
-            name: 'bar',
-            defaultValue: 'test2',
-            used: true,
-            groupId: 'bar',
-          },
-        },
-      });
+      // testApi.on.mock.calls[0][1]({
+      //   knobs: {
+      //     foo: {
+      //       name: 'foo',
+      //       defaultValue: 'test',
+      //       used: true,
+      //       groupId: 'foo',
+      //     },
+      //     bar: {
+      //       name: 'bar',
+      //       defaultValue: 'test2',
+      //       used: true,
+      //       groupId: 'bar',
+      //     },
+      //   },
+      // });
 
-      const wrapper = root.update().find(Panel);
+      // const wrapper = root.update().find(Panel);
 
-      const titles = wrapper
-        .find(TabsState)
-        .find('button')
-        .map((child) => child.prop('children'));
-      expect(titles).toEqual(['foo', 'bar']);
+      // const titles = wrapper
+      //   .find(TabsState)
+      //   .find('button')
+      //   .map((child) => child.prop('children'));
+      // expect(titles).toEqual(['foo', 'bar']);
 
-      const knobs = wrapper.find(PropForm);
-      // but it should not have its own PropForm in this case
-      expect(knobs.length).toEqual(titles.length);
-      expect(knobs).toMatchSnapshot();
+      // const knobs = wrapper.find(PropForm);
+      // // but it should not have its own PropForm in this case
+      // expect(knobs.length).toEqual(titles.length);
+      // expect(knobs).toMatchSnapshot();
 
-      root.unmount();
+      // root.unmount();
     });
 
     it.skip(`the ${DEFAULT_GROUP_ID} tab should have its own additional content when there are knobs both with and without a groupId`, () => {
@@ -220,37 +217,37 @@ describe('Panel', () => {
         </ThemeProvider>
       );
 
-      testApi.on.mock.calls[0][1]({
-        knobs: {
-          bar: {
-            name: 'bar',
-            defaultValue: 'test2',
-            used: true,
-            // no groupId
-          },
-          foo: {
-            name: 'foo',
-            defaultValue: 'test',
-            used: true,
-            groupId: 'foo',
-          },
-        },
-      });
+      // testApi.on.mock.calls[0][1]({
+      //   knobs: {
+      //     bar: {
+      //       name: 'bar',
+      //       defaultValue: 'test2',
+      //       used: true,
+      //       // no groupId
+      //     },
+      //     foo: {
+      //       name: 'foo',
+      //       defaultValue: 'test',
+      //       used: true,
+      //       groupId: 'foo',
+      //     },
+      //   },
+      // });
 
-      const wrapper = root.update().find(Panel);
+      // const wrapper = root.update().find(Panel);
 
-      const titles = wrapper
-        .find(TabsState)
-        .find('button')
-        .map((child) => child.prop('children'));
-      expect(titles).toEqual(['foo', DEFAULT_GROUP_ID]);
+      // const titles = wrapper
+      //   .find(TabsState)
+      //   .find('button')
+      //   .map((child) => child.prop('children'));
+      // expect(titles).toEqual(['foo', DEFAULT_GROUP_ID]);
 
-      const knobs = wrapper.find(PropForm).map((propForm) => propForm.prop('knobs'));
-      // there are props with no groupId so Other should also have its own PropForm
-      expect(knobs.length).toEqual(titles.length);
-      expect(knobs).toMatchSnapshot();
+      // const knobs = wrapper.find(PropForm).map((propForm) => propForm.prop('knobs'));
+      // // there are props with no groupId so Other should also have its own PropForm
+      // expect(knobs.length).toEqual(titles.length);
+      // expect(knobs).toMatchSnapshot();
 
-      root.unmount();
+      // root.unmount();
     });
   });
 });
