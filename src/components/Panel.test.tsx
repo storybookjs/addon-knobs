@@ -4,9 +4,9 @@ import { STORY_CHANGED } from '@storybook/core-events';
 import { TabsState } from '@storybook/components';
 
 import { ThemeProvider, themes, convert } from '@storybook/theming';
-import Panel, { DEFAULT_GROUP_ID } from '../Panel';
-import { CHANGE, SET } from '../../shared';
-import PropForm from '../PropForm';
+import Panel, { DEFAULT_GROUP_ID } from './Panel';
+import { CHANGE, SET } from '../shared';
+import PropForm from './PropForm';
 import { API } from '@storybook/api';
 
 type CreateMocked<Type> = {
