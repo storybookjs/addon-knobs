@@ -1,27 +1,24 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { ThemeProvider, themes, convert } from '@storybook/theming';
-import SelectType from '../types/Select';
+import SelectType from './Select';
 
 describe('Select', () => {
-  let knob;
-
   describe('Object values', () => {
-    beforeEach(() => {
-      knob = {
-        name: 'Colors',
-        value: '#00ff00',
-        options: {
-          Green: '#00ff00',
-          Red: '#ff0000',
-        },
-      };
-    });
-
     it('correctly maps option keys and values', () => {
       render(
         <ThemeProvider theme={convert(themes.light)}>
-          <SelectType knob={knob} />
+          <SelectType
+            knob={{
+              name: 'Colors',
+              value: '#00ff00',
+              options: {
+                Green: '#00ff00',
+                Red: '#ff0000',
+              },
+            }}
+            onChange={jest.fn()}
+          />
         </ThemeProvider>
       );
 
@@ -35,18 +32,19 @@ describe('Select', () => {
     });
 
     it('should set the default value for array-values correctly', () => {
-      knob = {
-        name: 'Array values',
-        options: {
-          '100 x 100': [100, 100],
-          '200 x 200': [200, 200],
-        },
-        value: [200, 200],
-      };
-
       const result = render(
         <ThemeProvider theme={convert(themes.light)}>
-          <SelectType knob={knob} />
+          <SelectType
+            knob={{
+              name: 'Array values',
+              options: {
+                '100 x 100': [100, 100],
+                '200 x 200': [200, 200],
+              },
+              value: [200, 200],
+            }}
+            onChange={jest.fn()}
+          />
         </ThemeProvider>
       );
       
@@ -55,18 +53,17 @@ describe('Select', () => {
   });
 
   describe('Array values', () => {
-    beforeEach(() => {
-      knob = {
-        name: 'Colors',
-        value: 'green',
-        options: ['green', 'red'],
-      };
-    });
-
     it('correctly maps option keys and values', () => {
       render(
         <ThemeProvider theme={convert(themes.light)}>
-          <SelectType knob={knob} />
+          <SelectType
+            knob={{
+              name: 'Colors',
+              value: 'green',
+              options: ['green', 'red'],
+            }}
+            onChange={jest.fn()}
+          />
         </ThemeProvider>
       );
 
