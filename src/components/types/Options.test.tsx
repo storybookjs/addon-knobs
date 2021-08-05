@@ -1,21 +1,22 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import ReactSelect from 'react-select';
-import OptionsType from '../types/Options';
+import OptionsType, { OptionsTypeKnob } from './Options';
 
 const mockOn = jest.fn();
 
 describe('Options', () => {
-  let knob;
-  let wrapper;
-  let firstLabel;
-  let firstInput;
-  let lastInput;
+  let knob: OptionsTypeKnob<any>;
+  let wrapper: HTMLElement;
+  let firstLabel: HTMLLabelElement;
+  let firstInput: HTMLInputElement;
+  let lastInput: HTMLInputElement;
 
   describe('renders checkbox input', () => {
     beforeEach(() => {
       knob = {
         name: 'Color',
+        value: undefined,
         defaultValue: ['#0ff'],
         options: {
           Red: '#f00',
@@ -27,7 +28,13 @@ describe('Options', () => {
         },
       };
 
-      wrapper = render(<OptionsType knob={knob} onChange={mockOn} />).container;
+      wrapper = render(
+        <OptionsType
+          knob={knob}
+          onChange={mockOn}
+          display={knob.optionsObj.display}
+        />
+      ).container;
       firstLabel = wrapper.querySelector('label');
       firstInput = wrapper.querySelector('input');
       lastInput = Array.from(wrapper.querySelectorAll('input')).pop();
@@ -47,12 +54,12 @@ describe('Options', () => {
     });
 
     it.skip('updates on change event', () => {
-      expect(wrapper.props().knob.defaultValue).toEqual(['#0ff']);
+      // expect(wrapper.props().knob.defaultValue).toEqual(['#0ff']);
 
-      firstInput.simulate('change');
+      // firstInput.simulate('change');
 
-      expect(mockOn).toHaveBeenCalled();
-      expect(wrapper.props().knob.defaultValue).toEqual(['#0ff', '#f00']);
+      // expect(mockOn).toHaveBeenCalled();
+      // expect(wrapper.props().knob.defaultValue).toEqual(['#0ff', '#f00']);
     });
   });
 
@@ -71,7 +78,13 @@ describe('Options', () => {
         },
       };
 
-      wrapper = render(<OptionsType knob={knob} onChange={mockOn} />).container;
+      wrapper = render(
+        <OptionsType
+          knob={knob}
+          onChange={mockOn}
+          display={knob.optionsObj.display}
+        />
+      ).container;
       firstLabel = wrapper.querySelector('label');
       firstInput = wrapper.querySelector('input');
       lastInput = Array.from(wrapper.querySelectorAll('input')).pop();
@@ -91,13 +104,13 @@ describe('Options', () => {
     });
 
     it.skip('updates on change event', () => {
-      firstInput.simulate('change');
-      expect(mockOn).toHaveBeenCalled();
+      // firstInput.simulate('change');
+      // expect(mockOn).toHaveBeenCalled();
     });
   });
 
   describe.skip('renders select input', () => {
-    let selectInput;
+    let selectInput: HTMLInputElement;
     beforeEach(() => {
       knob = {
         name: 'Color',
@@ -112,16 +125,22 @@ describe('Options', () => {
         },
       };
 
-      wrapper = render(<OptionsType knob={knob} onChange={mockOn} />).container;
-      selectInput = wrapper.find(ReactSelect).find('input');
+      wrapper = render(
+        <OptionsType
+          knob={knob}
+          onChange={mockOn}
+          display={knob.optionsObj.display}
+        />
+      ).container;
+      // selectInput = wrapper.find(ReactSelect).find('input');
     });
 
     it('updates when dropdown is opened and first option selected', () => {
-      // Simulate the arrow down event to open the dropdown menu.
-      selectInput.simulate('keyDown', { key: 'ArrowDown', keyCode: 40 });
+      // // Simulate the arrow down event to open the dropdown menu.
+      // selectInput.simulate('keyDown', { key: 'ArrowDown', keyCode: 40 });
 
-      // Simulate the enter key to select the first option.
-      selectInput.simulate('keyDown', { key: 'Enter', keyCode: 13 });
+      // // Simulate the enter key to select the first option.
+      // selectInput.simulate('keyDown', { key: 'Enter', keyCode: 13 });
 
       // selectInput.simulate('change');
       expect(mockOn).toHaveBeenCalled();
