@@ -1,5 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import { ThemeProvider, themes, convert } from '@storybook/theming';
 import SelectType from '../types/Select';
 
 describe('Select', () => {
@@ -18,11 +19,19 @@ describe('Select', () => {
     });
 
     it('correctly maps option keys and values', () => {
-      const wrapper = shallow(<SelectType knob={knob} />);
+      render(
+        <ThemeProvider theme={convert(themes.light)}>
+          <SelectType knob={knob} />
+        </ThemeProvider>
+      );
 
-      const green = wrapper.find('option').first();
-      expect(green.text()).toEqual('Green');
-      expect(green.prop('value')).toEqual('Green');
+      const options = screen.getAllByRole('option');
+      // Green
+      expect(options[0]).toHaveTextContent('Green');
+      expect(options[0]).toHaveProperty('value', 'Green');
+      // Red
+      expect(options[1]).toHaveTextContent('Red');
+      expect(options[1]).toHaveProperty('value', 'Red');
     });
 
     it('should set the default value for array-values correctly', () => {
@@ -35,9 +44,13 @@ describe('Select', () => {
         value: [200, 200],
       };
 
-      const wrapper = shallow(<SelectType knob={knob} />);
-      const value = wrapper.prop('value');
-      expect(value).toEqual('200 x 200');
+      const result = render(
+        <ThemeProvider theme={convert(themes.light)}>
+          <SelectType knob={knob} />
+        </ThemeProvider>
+      );
+      
+      expect(result.container.firstChild).toHaveProperty('value', '200 x 200');
     });
   });
 
@@ -51,11 +64,19 @@ describe('Select', () => {
     });
 
     it('correctly maps option keys and values', () => {
-      const wrapper = shallow(<SelectType knob={knob} />);
+      render(
+        <ThemeProvider theme={convert(themes.light)}>
+          <SelectType knob={knob} />
+        </ThemeProvider>
+      );
 
-      const green = wrapper.find('option').first();
-      expect(green.text()).toEqual('green');
-      expect(green.prop('value')).toEqual('green');
+      const options = screen.getAllByRole('option');
+      // Green
+      expect(options[0]).toHaveTextContent('green');
+      expect(options[0]).toHaveProperty('value', 'green');
+      // Red
+      expect(options[1]).toHaveTextContent('red');
+      expect(options[1]).toHaveProperty('value', 'red');
     });
   });
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import RadioType from '../types/Radio';
 
 describe('Radio', () => {
@@ -18,27 +18,27 @@ describe('Radio', () => {
 
   describe('displays value of button input', () => {
     it('correctly renders labels', () => {
-      const wrapper = mount(<RadioType knob={knob} />);
+      const wrapper = render(<RadioType knob={knob} />).container;
 
-      const greenLabel = wrapper.find('label').first();
-      expect(greenLabel.text()).toEqual('Green');
+      const greenLabel = wrapper.querySelector('label');
+      expect(greenLabel).toHaveTextContent('Green');
     });
 
     it('sets value on the radio buttons', () => {
-      const wrapper = mount(<RadioType knob={knob} />);
+      const wrapper = render(<RadioType knob={knob} />).container;
 
-      const greenInput = wrapper.find('input').first();
-      expect(greenInput.prop('value')).toEqual('#319C16');
+      const greenInput = wrapper.querySelector('input');
+      expect(greenInput).toHaveProperty('value', '#319C16');
     });
 
     it('marks the correct checkbox as checked', () => {
-      const wrapper = mount(<RadioType knob={knob} />);
+      const wrapper = render(<RadioType knob={knob} />).container;
 
-      const greenInput = wrapper.find('input').first();
-      const redInput = wrapper.find('input').last();
+      const greenInput = wrapper.querySelector('input');
+      const redInput = Array.from(wrapper.querySelectorAll('input')).pop();
 
-      expect(greenInput.prop('checked')).toEqual(true);
-      expect(redInput.prop('checked')).toEqual(false);
+      expect(greenInput).toHaveProperty('checked', true);
+      expect(redInput).toHaveProperty('checked', false);
     });
   });
 });
