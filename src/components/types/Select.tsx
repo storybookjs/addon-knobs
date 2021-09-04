@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Form } from '@storybook/components';
 import { KnobControlConfig, KnobControlProps } from './types';
 
-export type SelectTypeKnobValue = string | number | boolean | null | undefined | PropertyKey[];
+export type SelectTypeKnobValue = string | number | boolean | null | undefined | PropertyKey[] | Record<string, unknown>;
 
 export type SelectTypeOptionsProp<T extends SelectTypeKnobValue = SelectTypeKnobValue> =
   | Record<PropertyKey, T>

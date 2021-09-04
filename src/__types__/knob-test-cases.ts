@@ -193,6 +193,30 @@ expectKnobOfType<number[]>(
   )
 );
 
+expectKnobOfType<{}>(
+  select(
+    'select with object options',
+    {
+      foo: { foo: 'bar' },
+      bar: { bar: 'foo' },
+      foobar: { foobar: 'barfoo' },
+    },
+    { foo: 'bar' }
+  )
+);
+
+expectKnobOfType<{}|string[]|string>(
+  select(
+    'select with object, array, and string options',
+    {
+      foo: { foo: 'bar' },
+      bar: 'bar',
+      foobar: ['foo', 'bar'],
+    },
+    { foo: 'bar' }
+  )
+);
+
 /** Object knob */
 
 expectKnobOfType(
