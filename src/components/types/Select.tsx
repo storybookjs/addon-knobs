@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { Form } from '@storybook/components';
 import { KnobControlConfig, KnobControlProps } from './types';
+import { Knob } from 'src/type-defs';
+import { Codec } from '.';
 
 export type SelectTypeKnobValue = string | number | boolean | null | undefined | PropertyKey[] | Record<string, unknown>;
 
