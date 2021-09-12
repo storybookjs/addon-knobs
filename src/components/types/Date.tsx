@@ -53,11 +53,18 @@ export default class DateType extends Component<DateTypeProps, DateTypeState> {
     onChange: PropTypes.func as Validator<DateTypeProps['onChange']>,
   };
 
-  static serialize = (value: DateTypeKnobValue) =>
-    new Date(value).getTime() || new Date().getTime();
+  static serialize = (value: DateTypeKnobValue) => {
+    if (!value) { return undefined; }
+    return String(new Date(value).getTime());
+  }
 
-  static deserialize = (value: DateTypeKnobValue) =>
-    new Date(value).getTime() || new Date().getTime();
+  static deserialize = (value: string) => {
+    if (!value) { return undefined }
+    if (/-?\d+\.?\d*/.test(value)) {
+      return parseFloat(value) 
+    }
+    return new Date(value).getTime() ?? new Date().getTime();
+  }
 
   static getDerivedStateFromProps() {
     return { valid: true };

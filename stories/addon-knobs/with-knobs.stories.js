@@ -241,7 +241,7 @@ export const ComplexSelect = () => {
       string: 'string',
       object: {},
       array: [1, 2, 3],
-      function: () => {},
+      function: () => { },
     },
     'string'
   );
@@ -396,8 +396,9 @@ export const WithKnobValueToBeEncoded = () => {
 };
 
 
-export const WithNumericSelect = () => {
-  return select(
+// Case for reproduction of https://github.com/storybookjs/addon-knobs/issues/1
+export const ComplexSelectSerialization = () => {
+  const numericValue = select(
     'Select a number',
     {
       ONE: 1,
@@ -406,4 +407,30 @@ export const WithNumericSelect = () => {
     },
     1
   );
+
+  const arrayValue = select(
+    'Select an array',
+    {
+      ONE: [0, 1],
+      TWO: [0, 2],
+      THREE: [0, 3],      
+    },
+    [0, 1]
+  );
+
+  const objectValue = select(
+    'Select an object',
+    {
+      ONE: { value: 1 },
+      TWO: { value: 2 },
+      THREE: { value: 3 },
+    },
+    { value: 1}
+  );
+
+  return <>
+    <p>Numeric value: {numericValue ?? 'unset'}</p>
+    <p>Array value: {(arrayValue && arrayValue[1]) ?? 'unset'}</p>
+    <p>Object value: {(objectValue && objectValue.value) ?? 'unset'}</p>
+  </>
 };

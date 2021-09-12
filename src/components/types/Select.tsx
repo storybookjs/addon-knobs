@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { Form } from '@storybook/components';
 import { KnobControlConfig, KnobControlProps } from './types';
+import { Codec } from '.';
+import { Knob } from 'src/type-defs';
 
 export type SelectTypeKnobValue = string | number | boolean | null | undefined | PropertyKey[] | Record<string, unknown>;
 
@@ -22,13 +24,42 @@ export interface SelectTypeProps<T extends SelectTypeKnobValue = SelectTypeKnobV
   knob: SelectTypeKnob<T>;
 }
 
-const serialize = (value: SelectTypeKnobValue) => value;
-const deserialize = (value: SelectTypeKnobValue) => value;
+const serialize = (value: SelectTypeKnobValue): string | undefined => {
+  if (!value) { return undefined; }
+  if (typeof value === 'object') { // Works for arrays and objects.
+    return JSON.stringify(value);
+  }
+  return String(value);
+};
 
-const SelectType: FunctionComponent<SelectTypeProps> & {
-  serialize: typeof serialize;
-  deserialize: typeof deserialize;
-} = ({ knob, onChange }) => {
+const deserialize = (value: string, knob?: Knob) => {
+  if (!value) {
+    return undefined;
+  }
+
+  if (!knob) {
+    // Without options to pick from, we can only make educated guesses.
+    if (value.indexOf(']') > 0 || value.indexOf('}') > 0) {
+      return JSON.parse(value);
+    } else if (/-?\d+\.\d*/.test(value)) {
+      return Number(value);
+    } else if (value === 'true' || value === 'false') {
+      return value === 'true';
+    } else {
+      return value;
+    }
+  }
+
+  const castKnob = knob as unknown as SelectTypeKnob; // Safe because only called for SelectType.
+  const options = Array.isArray(castKnob.options) ? castKnob.options : Object.values(castKnob.options);
+
+  // Now to find the option that matches. Returns 'undefined if doesn't match any values'.
+  // This is done this way to support complex types (like objects with array values etc.).
+  return options.find(option => serialize(option) === value);
+};
+
+const SelectType: FunctionComponent<SelectTypeProps> & Codec
+ = ({ knob, onChange }) => {
   const { options } = knob;
 
   const callbackReduceArrayOptions = (acc: any, option: any, i: number) => {
@@ -43,12 +74,7 @@ const SelectType: FunctionComponent<SelectTypeProps> & {
     const { value: knobVal } = knob;
     const entryVal = entries[key];
 
-    if (Array.isArray(knobVal)) {
-      return JSON.stringify(entryVal) === JSON.stringify(knobVal);
-    }
-
-    // NOTE: Using loose equals here to match number values to string-serialized values.
-    return entryVal == knobVal;
+    return (JSON.stringify(entryVal) === JSON.stringify(knobVal))
   });
 
   return (
