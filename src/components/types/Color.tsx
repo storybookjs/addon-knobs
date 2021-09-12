@@ -62,8 +62,11 @@ export default class ColorType extends Component<ColorTypeProps, ColorTypeState>
   static serialize = (value: ColorTypeKnobValue) => value;
 
   static deserialize = (value: ColorTypeKnobValue) => {
+
     if (!value) { return undefined }
+
     value;
+
   }
 
   state: ColorTypeState = {

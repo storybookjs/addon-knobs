@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import { Form } from '@storybook/components';
 import { KnobControlConfig, KnobControlProps } from './types';
-import { Codec } from '.';
-import { Knob } from 'src/type-defs';
 
 export type SelectTypeKnobValue = string | number | boolean | null | undefined | PropertyKey[] | Record<string, unknown>;
 
@@ -74,7 +72,12 @@ const SelectType: FunctionComponent<SelectTypeProps> & Codec
     const { value: knobVal } = knob;
     const entryVal = entries[key];
 
-    return (JSON.stringify(entryVal) === JSON.stringify(knobVal))
+    if (Array.isArray(knobVal)) {
+      return JSON.stringify(entryVal) === JSON.stringify(knobVal);
+    }
+
+    // NOTE: Using loose equals here to match number values to string-serialized values.
+    return entryVal == knobVal;
   });
 
   return (

@@ -21,6 +21,16 @@ describe('Array', () => {
     expect(onChange).toHaveBeenLastCalledWith(['Fishing', 'Skiing', '']);
   });
 
+
+
+
+
+
+
+
+
+
+
   it('should change to an empty array when emptied', () => {
     const onChange = jest.fn();
     render(

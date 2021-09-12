@@ -38,7 +38,6 @@ export type Codec = {
   serialize: (value: any) => string | undefined;
   deserialize: (serializedValue: string, knob?: Knob) => any;
 };
-
 export type KnobControlType = ComponentType<any> & Codec;
 
 // Note: this is a utility function that helps in resolving types more orderly
