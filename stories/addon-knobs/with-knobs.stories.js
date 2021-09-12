@@ -394,3 +394,16 @@ WithDuplicateDecorator.decorators = [withKnobs];
 export const WithKnobValueToBeEncoded = () => {
   return text('Text', '10% 20%');
 };
+
+
+export const WithNumericSelect = () => {
+  return select(
+    'Select a number',
+    {
+      ONE: 1,
+      TWO: 2,
+      THREE: 3,
+    },
+    1
+  );
+};

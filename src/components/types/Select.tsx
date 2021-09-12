@@ -46,7 +46,9 @@ const SelectType: FunctionComponent<SelectTypeProps> & {
     if (Array.isArray(knobVal)) {
       return JSON.stringify(entryVal) === JSON.stringify(knobVal);
     }
-    return entryVal === knobVal;
+
+    // NOTE: Using loose equals here to match number values to string-serialized values.
+    return entryVal == knobVal;
   });
 
   return (
