@@ -1,3 +1,23 @@
+# v6.4.0 (Sat Nov 27 2021)
+
+#### 🚀 Enhancement
+
+- 6.4.0 [#41](https://github.com/storybookjs/addon-knobs/pull/41) ([@shilman](https://github.com/shilman))
+
+#### 🐛 Bug Fix
+
+- fix gh secret [#40](https://github.com/storybookjs/addon-knobs/pull/40) ([@shilman](https://github.com/shilman))
+
+#### ⚠️ Pushed to `main`
+
+- Merge branch 'next' ([@shilman](https://github.com/shilman))
+
+#### Authors: 1
+
+- Michael Shilman ([@shilman](https://github.com/shilman))
+
+---
+
 # v6.3.1 (Sat Sep 04 2021)
 
 #### 🐛 Bug Fix
