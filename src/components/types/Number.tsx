@@ -72,7 +72,8 @@ export default class NumberType extends Component<NumberTypeProps> {
   static serialize = (value: NumberTypeKnobValue | null | undefined) =>
     value === null || value === undefined ? '' : String(value);
 
-  static deserialize = (value: string) => (value === '' ? null : parseFloat(value));
+  static deserialize = (value: string) => 
+    (value === '' || value === null || value === undefined ? undefined : parseFloat(value));
 
   shouldComponentUpdate(nextProps: NumberTypeProps) {
     const { knob } = this.props;

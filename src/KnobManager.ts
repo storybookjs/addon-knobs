@@ -10,6 +10,7 @@ import { Knob, KnobType, Mutable } from './type-defs';
 import { SET } from './shared';
 
 import { deserializers } from './converters';
+import { Codec } from './components/types';
 
 const knobValuesFromUrl: Record<string, string> = Object.entries(getQueryParams()).reduce(
   (acc, [k, v]) => {
@@ -103,7 +104,8 @@ export default class KnobManager {
     };
 
     if (knobValuesFromUrl[knobName]) {
-      const value = deserializers[options.type](knobValuesFromUrl[knobName]);
+      const deserialize = deserializers[options.type] as Codec['deserialize'];
+      const value = deserialize(knobValuesFromUrl[knobName], options);
 
       knobInfo.defaultValue = value;
       knobInfo.value = value;

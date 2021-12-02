@@ -55,9 +55,27 @@ class RadiosType extends Component<RadiosTypeProps> {
     isInline: PropTypes.bool as Validator<RadiosTypeProps['isInline']>,
   };
 
-  static serialize = (value: RadiosTypeKnobValue) => value;
+  static serialize = (value: RadiosTypeKnobValue) => !value ? undefined : JSON.stringify(value);
 
-  static deserialize = (value: RadiosTypeKnobValue) => value;
+  static deserialize = (value: string, knob: any) => {
+    if (!value) { 
+      return undefined;
+    }
+
+    if (!knob) {
+      // Without options, the best that we can do is use the value as-is.
+      return JSON.parse(value);
+    }
+
+    if (typeof value !== 'string') {
+      value = String(value);
+    }
+
+    const optionsObject = (knob as RadiosTypeKnob).options;
+    const options = Array.isArray(optionsObject) ? optionsObject : Object.values(optionsObject);
+    return options.find(option => RadiosType.serialize(option) === String(value)) ?? value;
+  };
+
 
   private renderRadioButtonList({ options }: RadiosTypeKnob) {
     if (Array.isArray(options)) {

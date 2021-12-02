@@ -2,6 +2,7 @@ module.exports = {
   cacheDirectory: '.cache/jest',
   clearMocks: true,
   testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+  testPathIgnorePatterns: ["/node_modules/", "/dist"],
   collectCoverage: false,
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',

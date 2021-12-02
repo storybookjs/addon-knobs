@@ -63,8 +63,8 @@ interface OptionsSelectValueItem {
   label: string;
 }
 
-const serialize: { <T>(value: T): T } = (value) => value;
-const deserialize: { <T>(value: T): T } = (value) => value;
+const serialize = (value: any) => !value ? undefined : JSON.stringify(value);
+const deserialize = (value: string) => !value ? undefined : JSON.parse(value);
 
 const OptionsType: FunctionComponent<OptionsTypeProps<any>> & {
   serialize: typeof serialize;

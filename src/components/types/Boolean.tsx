@@ -23,8 +23,8 @@ const Input = styled.input({
   color: '#555',
 });
 
-const serialize = (value: BooleanTypeKnobValue): string | null => (value ? String(value) : null);
-const deserialize = (value: string | null) => value === 'true';
+const serialize = (value: BooleanTypeKnobValue): string | undefined => (value ? String(value) : undefined);
+const deserialize = (value: string | undefined) => value === 'true';
 
 const BooleanType: FunctionComponent<BooleanTypeProps> & {
   serialize: typeof serialize;

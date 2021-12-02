@@ -134,7 +134,7 @@ export default class KnobPanel extends PureComponent<KnobPanelProps> {
 
           // If the knob value present in url
           if (urlValue !== undefined) {
-            const value = getKnobControl(knob.type).deserialize(urlValue);
+            const value = getKnobControl(knob.type).deserialize(urlValue, knob);
             knob.value = value;
             queryParams[`knob-${name}`] = getKnobControl(knob.type).serialize(value);
 
