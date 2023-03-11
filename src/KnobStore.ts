@@ -36,7 +36,7 @@ export default class KnobStore {
     if (this.timer) {
       clearTimeout(this.timer);
     }
-    this.timer = setTimeout(callAll, 50, this.callbacks) as number;
+    this.timer = setTimeout(callAll, 50, this.callbacks) as unknown as number;
   }
 
   update(key: string, options: Partial<KnobStoreKnob>) {

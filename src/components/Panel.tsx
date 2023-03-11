@@ -25,7 +25,7 @@ const getTimestamp = () => +new Date();
 
 export const DEFAULT_GROUP_ID = 'Other';
 
-const PanelWrapper = styled(({ children, className }) => (
+const PanelWrapper = styled(({ children, className }: any) => (
   <ScrollArea horizontal vertical className={className}>
     {children}
   </ScrollArea>
@@ -276,7 +276,7 @@ export default class KnobPanel extends PureComponent<KnobPanelProps> {
 
     return (
       <Fragment>
-        <PanelWrapper>
+        <PanelWrapper className={undefined}>
           {entries.length > 1 ? (
             <TabsState>
               {entries.map(([k, v]) => (

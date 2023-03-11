@@ -1,8 +1,9 @@
 /* eslint no-underscore-dangle: 0 */
 
-import { navigator } from 'global';
+// navigator exists in Jest but not the browser. global exists in the browser but not Jest
+import { navigator as gNavigator, global } from 'global';
 import escape from 'escape-html';
-import { getQueryParams } from '@storybook/client-api';
+import { getQueryParams } from '@storybook/preview-api';
 import { Channel } from '@storybook/channels';
 
 import KnobStore, { KnobStoreKnob } from './KnobStore';
@@ -10,6 +11,8 @@ import { Knob, KnobType, Mutable } from './type-defs';
 import { SET } from './shared';
 
 import { deserializers } from './converters';
+
+const navigator: Navigator = gNavigator || global.navigator;
 
 const knobValuesFromUrl: Record<string, string> = Object.entries(getQueryParams()).reduce(
   (acc, [k, v]) => {
