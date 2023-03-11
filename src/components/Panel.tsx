@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment, Validator } from 'react';
+import React, { PureComponent, Fragment, Validator, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import qs from 'qs';
 import { document } from 'global';
@@ -25,11 +25,13 @@ const getTimestamp = () => +new Date();
 
 export const DEFAULT_GROUP_ID = 'Other';
 
-const PanelWrapper = styled(({ children, className }: any) => (
-  <ScrollArea horizontal vertical className={className}>
-    {children}
-  </ScrollArea>
-))({
+const PanelWrapper = styled(
+  ({ children, className }: { children: ReactNode; className?: string }) => (
+    <ScrollArea horizontal vertical className={className}>
+      {children}
+    </ScrollArea>
+  )
+)({
   height: '100%',
   width: '100%',
 });
@@ -276,7 +278,7 @@ export default class KnobPanel extends PureComponent<KnobPanelProps> {
 
     return (
       <Fragment>
-        <PanelWrapper className={undefined}>
+        <PanelWrapper>
           {entries.length > 1 ? (
             <TabsState>
               {entries.map(([k, v]) => (
