@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
  */
 const consoleError = global.console.error;
 global.console.error = (...args) => {
-  const reactDomError = args[0].includes('ReactDOM.render');
+  const reactDomError = (args[0].toString()).includes('ReactDOM.render');
   if (reactDomError) {
     return;
   }

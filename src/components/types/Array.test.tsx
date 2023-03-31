@@ -5,6 +5,13 @@ import { ThemeProvider, themes, convert } from '@storybook/theming';
 import ArrayType from './Array';
 
 describe('Array', () => {
+  // copied from https://github.com/Andarist/react-textarea-autosize/blob/ab4c1ec20b41ea35f7962da13eb086fdc4832a81/src/__tests__/index.test.js
+  beforeAll(() => {
+    Object.defineProperty(document, 'fonts', {
+      value: { addEventListener() {}, removeEventListener() {} },
+    });
+  });
+
   it('should subscribe to setKnobs event of channel', async () => {
     const onChange = jest.fn();
     render(
