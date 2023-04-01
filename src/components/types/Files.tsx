@@ -57,7 +57,7 @@ FilesType.defaultProps = {
 FilesType.propTypes = {
   knob: PropTypes.shape({
     name: PropTypes.string,
-  }) as Validator<FilesTypeProps['knob']>,
+  }) as unknown as Validator<FilesTypeProps['knob']>,
   onChange: PropTypes.func as Validator<FilesTypeProps['onChange']>,
 };
 
