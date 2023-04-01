@@ -1,3 +1,30 @@
+# v7.0.0 (Sat Apr 01 2023)
+
+#### 💥 Breaking Change
+
+- Support Storybook 7.0.0 [#48](https://github.com/storybookjs/addon-knobs/pull/48) ([@literalpie](https://github.com/literalpie))
+
+#### ⚠️ Pushed to `main`
+
+- Add Git user info to release workflow ([@JReinhold](https://github.com/JReinhold))
+
+#### 🏠 Internal
+
+- Remove unnecessary `check-metadata.js` [#50](https://github.com/storybookjs/addon-knobs/pull/50) ([@JReinhold](https://github.com/JReinhold))
+- Upgrade Node in CI [#49](https://github.com/storybookjs/addon-knobs/pull/49) ([@jonniebigodes](https://github.com/jonniebigodes) [@JReinhold](https://github.com/JReinhold))
+
+#### 📝 Documentation
+
+- Chore: (Docs) Updates link for support table [#44](https://github.com/storybookjs/addon-knobs/pull/44) ([@jonniebigodes](https://github.com/jonniebigodes))
+
+#### Authors: 3
+
+- [@jonniebigodes](https://github.com/jonniebigodes)
+- Benjamin Kindle ([@literalpie](https://github.com/literalpie))
+- Jeppe Reinhold ([@JReinhold](https://github.com/JReinhold))
+
+---
+
 # v6.4.0 (Sat Nov 27 2021)
 
 #### 🚀 Enhancement
