@@ -68,6 +68,7 @@ function resetKnobsAndForceReRender() {
 }
 
 function disconnectCallbacks() {
+  knobStore.reset();
   const channel = addons.getChannel();
   channel.removeListener(CHANGE, knobChanged);
   channel.removeListener(CLICK, knobClicked);
