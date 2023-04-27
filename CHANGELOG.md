@@ -1,3 +1,21 @@
+# v7.0.2 (Thu Apr 27 2023)
+
+#### 🐛 Bug Fix
+
+- [Hotfix] Seeing knobs from previously selected story [#45](https://github.com/storybookjs/addon-knobs/pull/45) (AEkimov2@slb.com [@mgameover](https://github.com/mgameover))
+
+#### ⚠️ Pushed to `main`
+
+- Merge branch 'main' of github.com:storybookjs/addon-knobs into next ([@JReinhold](https://github.com/JReinhold))
+
+#### Authors: 3
+
+- Alex ([@mgameover](https://github.com/mgameover))
+- Alexey Ekimov (AEkimov2@slb.com)
+- Jeppe Reinhold ([@JReinhold](https://github.com/JReinhold))
+
+---
+
 # v7.0.1 (Thu Apr 27 2023)
 
 #### 🐛 Bug Fix
