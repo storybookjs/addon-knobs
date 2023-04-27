@@ -1,3 +1,15 @@
+# v7.0.1 (Thu Apr 27 2023)
+
+#### 🐛 Bug Fix
+
+- build: make storybook peer dependency less strict [#51](https://github.com/storybookjs/addon-knobs/pull/51) ([@literalpie](https://github.com/literalpie))
+
+#### Authors: 1
+
+- Benjamin Kindle ([@literalpie](https://github.com/literalpie))
+
+---
+
 # v7.0.0 (Sat Apr 01 2023)
 
 #### 💥 Breaking Change
