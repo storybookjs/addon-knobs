@@ -1,11 +1,18 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider, themes, convert } from '@storybook/theming';
 import ArrayType from './Array';
 
 describe('Array', () => {
-  it('should subscribe to setKnobs event of channel', () => {
+  // copied from https://github.com/Andarist/react-textarea-autosize/blob/ab4c1ec20b41ea35f7962da13eb086fdc4832a81/src/__tests__/index.test.js
+  beforeAll(() => {
+    Object.defineProperty(document, 'fonts', {
+      value: { addEventListener() {}, removeEventListener() {} },
+    });
+  });
+
+  it('should subscribe to setKnobs event of channel', async () => {
     const onChange = jest.fn();
     render(
       <ThemeProvider theme={convert(themes.light)}>
@@ -17,7 +24,9 @@ describe('Array', () => {
     );
     const input = screen.getByRole('textbox');
     expect(input).toHaveValue('Fishing,Skiing');
-    userEvent.type(input, ',');
+    await act(async () => {
+      await userEvent.type(input, ',');
+    });
     expect(onChange).toHaveBeenLastCalledWith(['Fishing', 'Skiing', '']);
   });
 

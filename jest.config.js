@@ -15,8 +15,10 @@ module.exports = {
   coverageDirectory: 'coverage',
   setupFilesAfterEnv: ['./scripts/jest.init.js'],
   coverageReporters: ['lcov'],
+  testEnvironmentOptions: {
+    url: 'http://localhost',
+  },
   testEnvironment: 'jest-environment-jsdom',
   setupFiles: [],
-  testURL: 'http://localhost',
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'node'],
 };

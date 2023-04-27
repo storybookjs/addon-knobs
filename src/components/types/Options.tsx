@@ -105,7 +105,7 @@ const OptionsType: FunctionComponent<OptionsTypeProps<any>> & {
         value={defaultValue}
         options={options}
         isMulti={isMulti}
-        onChange={handleChange}
+        onChange={handleChange as any}
       />
     );
   }
@@ -124,7 +124,7 @@ OptionsType.propTypes = {
     name: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
     options: PropTypes.object,
-  }) as Validator<OptionsTypeProps<any>['knob']>,
+  }) as unknown as Validator<OptionsTypeProps<any>['knob']>,
   display: PropTypes.oneOf<OptionsKnobOptionsDisplay>([
     'radio',
     'inline-radio',

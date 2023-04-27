@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { STORY_CHANGED } from '@storybook/core-events';
 import { TabsState } from '@storybook/components';
 
@@ -13,7 +13,9 @@ type CreateMocked<Type> = {
   [Property in keyof Type]: jest.Mock & Type[Property];
 };
 
-const createTestApi = (): CreateMocked<Pick<API, 'on' | 'off' | 'emit' | 'getQueryParam' | 'setQueryParams'>> => ({
+const createTestApi = (): CreateMocked<
+  Pick<API, 'on' | 'off' | 'emit' | 'getQueryParam' | 'setQueryParams'>
+> => ({
   on: jest.fn(() => () => {}),
   off: jest.fn(),
   emit: jest.fn(),
@@ -47,12 +49,10 @@ describe('Panel', () => {
   describe('setKnobs handler', () => {
     it('should read url params and set values for existing knobs', () => {
       const handlers = {};
-
       const testQueryParams = {
         'knob-foo': 'test string',
         bar: 'some other string',
       };
-
       const testApi = {
         on: (e, handler) => {
           handlers[e] = handler;
@@ -63,14 +63,12 @@ describe('Panel', () => {
         getQueryParam: (key) => testQueryParams[key],
         setQueryParams: jest.fn(),
       };
-
       render(
         <ThemeProvider theme={convert(themes.light)}>
           <Panel api={testApi} active />
         </ThemeProvider>
       );
       const setKnobsHandler = handlers[SET];
-
       const knobs = {
         foo: {
           name: 'foo',
@@ -83,8 +81,9 @@ describe('Panel', () => {
           type: 'text',
         },
       };
-
-      setKnobsHandler({ knobs, timestamp: +new Date() });
+      act(() => {
+        setKnobsHandler({ knobs, timestamp: +new Date() });
+      });
       const knobFromUrl = {
         name: 'foo',
         value: testQueryParams['knob-foo'],

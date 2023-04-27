@@ -23,6 +23,8 @@ First of all, you need to install Knobs into your project as a dev dependency.
 yarn add @storybook/addon-knobs --dev
 ```
 
+The latest version of this addon supports Storybook v7. If you're using a previous version of Storybook you need to install the matching version of this addon, eg `@storybook/addon-knobs@6.4.0`.
+
 within `.storybook/main.js`:
 
 ```js
