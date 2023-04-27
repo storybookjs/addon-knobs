@@ -36,14 +36,17 @@ export default class ArrayType extends Component<ArrayTypeProps> {
     onChange: PropTypes.func as Validator<ArrayTypeProps['onChange']>,
   };
 
-  static serialize = (value: ArrayTypeKnobValue) => value;
+  static serialize = (value: ArrayTypeKnobValue) => JSON.stringify(value ?? []);
 
-  static deserialize = (value: string[] | Record<string, string>) => {
-    if (Array.isArray(value)) return value;
+  static deserialize = (value: string) => {
+    if (!value) { return [] }
 
-    return Object.keys(value)
-      .sort()
-      .reduce((array, key) => [...array, value[key]], [] as string[]);
+    // For extra safety.
+    if (typeof value !== 'string') {
+      value = ArrayType.serialize(value);
+    }
+    
+    return JSON.parse(value);
   };
 
   shouldComponentUpdate(nextProps: Readonly<ArrayTypeProps>) {

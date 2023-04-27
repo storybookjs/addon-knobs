@@ -65,9 +65,12 @@ export default class CheckboxesType extends Component<CheckboxesTypeProps, Check
     isInline: PropTypes.bool as Validator<CheckboxesTypeProps['isInline']>,
   };
 
-  static serialize = (value: CheckboxesTypeKnobValue) => value;
+  static serialize = (value: CheckboxesTypeKnobValue) => JSON.stringify(value);
 
-  static deserialize = (value: CheckboxesTypeKnobValue) => value;
+  static deserialize = (value: string) => {
+    if (!value) { return undefined }
+    return JSON.parse(value);
+  }
 
   constructor(props: CheckboxesTypeProps) {
     super(props);

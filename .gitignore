@@ -6,3 +6,4 @@ build-storybook.log
 .env
 .cache
 yarn-error.log
+*.orig

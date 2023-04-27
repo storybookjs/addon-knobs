@@ -3,6 +3,7 @@ import { ComponentType } from 'react';
 import TextType from './Text';
 import NumberType from './Number';
 import ColorType from './Color';
+import CheckboxType from './Checkboxes';
 import BooleanType from './Boolean';
 import ObjectType from './Object';
 import SelectType from './Select';
@@ -12,10 +13,12 @@ import DateType from './Date';
 import ButtonType from './Button';
 import FilesType from './Files';
 import OptionsType from './Options';
+import { Knob } from 'src/type-defs';
 
 const KnobControls = {
   text: TextType,
   number: NumberType,
+  checkbox: CheckboxType,
   color: ColorType,
   boolean: BooleanType,
   object: ObjectType,
@@ -31,10 +34,11 @@ export default KnobControls;
 
 export type KnobType = keyof typeof KnobControls;
 
-export type KnobControlType = ComponentType<any> & {
-  serialize: (v: any) => any;
-  deserialize: (v: any) => any;
+export type Codec = {
+  serialize: (value: any) => string | undefined;
+  deserialize: (serializedValue: string, knob?: Knob) => any;
 };
+export type KnobControlType = ComponentType<any> & Codec;
 
 // Note: this is a utility function that helps in resolving types more orderly
 export const getKnobControl = (type: KnobType) => KnobControls[type] as KnobControlType;
