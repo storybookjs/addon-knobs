@@ -7,7 +7,7 @@ import { createTitleListener } from './title';
 addons.register(ADDON_ID, (api) => {
   addons.addPanel(PANEL_ID, {
     title: createTitleListener(api),
-    render: ({ active, key }) => <Panel api={api} key={key} active={active} />,
+    render: ({ active }) => <Panel api={api} active={active} />,
     paramKey: PARAM_KEY,
   });
 });
