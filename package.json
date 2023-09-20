@@ -29,6 +29,7 @@
     "release": "npm run build && auto shipit"
   },
   "dependencies": {
+    "@storybook/preview-api": "^7.0.0",
     "copy-to-clipboard": "^3.3.3",
     "core-js": "^3.29.0",
     "escape-html": "^1.0.3",
@@ -76,7 +77,6 @@
     "@storybook/components": "^7.0.0",
     "@storybook/core-events": "^7.0.0",
     "@storybook/theming": "^7.0.0",
-    "@storybook/preview-api": "^7.0.0",
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
