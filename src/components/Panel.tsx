@@ -145,7 +145,6 @@ export default class KnobPanel extends PureComponent<KnobPanelProps> {
         }
       });
 
-      api.setQueryParams(queryParams);
       this.setState({ knobs });
 
       this.loadedFromUrl = true;
@@ -180,7 +179,6 @@ export default class KnobPanel extends PureComponent<KnobPanelProps> {
 
   handleChange = (changedKnob: KnobStoreKnob) => {
     this.lastEdit = getTimestamp();
-    const { api } = this.props;
     const { knobs } = this.state;
     const { name } = changedKnob;
     const newKnobs = { ...knobs };
@@ -198,8 +196,6 @@ export default class KnobPanel extends PureComponent<KnobPanelProps> {
         const knob = newKnobs[n];
         queryParams[`knob-${n}`] = getKnobControl(knob.type).serialize(knob.value);
       });
-
-      api.setQueryParams(queryParams);
     });
   };
 
