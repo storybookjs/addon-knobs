@@ -145,6 +145,7 @@ export default class KnobPanel extends PureComponent<KnobPanelProps> {
         }
       });
 
+      history.pushState(null, '', location.href.split('&')[0]);
       this.setState({ knobs });
 
       this.loadedFromUrl = true;
