@@ -9,21 +9,7 @@ import KnobStore, { KnobStoreKnob } from './KnobStore';
 import { Knob, KnobType, Mutable } from './type-defs';
 import { SET } from './shared';
 
-import { deserializers } from './converters';
-
 const navigator: Navigator = gNavigator || global.navigator;
-
-const knobValuesFromUrl: Record<string, string> = {};
-// getQueryParams is now a part of the manager storybookApi. We don't have a way to access that here.
-// Object.entries(getQueryParams()).reduce(
-//   (acc, [k, v]) => {
-//     if (k.includes('knob-')) {
-//       return { ...acc, [k.replace('knob-', '')]: v };
-//     }
-//     return acc;
-//   },
-//   {}
-// );
 
 // This is used by _mayCallChannel to determine how long to wait to before triggering a panel update
 const PANEL_UPDATE_INTERVAL = 400;
@@ -106,16 +92,7 @@ export default class KnobManager {
       label: name,
     };
 
-    if (knobValuesFromUrl[knobName]) {
-      const value = deserializers[options.type](knobValuesFromUrl[knobName]);
-
-      knobInfo.defaultValue = value;
-      knobInfo.value = value;
-
-      delete knobValuesFromUrl[knobName];
-    } else {
-      knobInfo.defaultValue = options.value;
-    }
+    knobInfo.defaultValue = options.value;
 
     knobStore.set(knobName, knobInfo as KnobStoreKnob);
     return this.getKnobValue(knobStore.get(knobName));
