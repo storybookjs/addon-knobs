@@ -283,7 +283,7 @@ export default class KnobPanel extends PureComponent<KnobPanelProps> {
             <TabsState>
               {entries.map(([k, v]) => (
                 <div id={k} key={k} title={v.title}>
-                  {v.render}
+                  {v.render as unknown as ReactNode}
                 </div>
               ))}
             </TabsState>

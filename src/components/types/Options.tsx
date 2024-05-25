@@ -70,7 +70,7 @@ const OptionsType: FunctionComponent<OptionsTypeProps<any>> & {
   serialize: typeof serialize;
   deserialize: typeof deserialize;
 } = (props) => {
-  const { knob, onChange } = props;
+  const { knob = {} as any, onChange = (value)=>value } = props;
   const { display } = knob.optionsObj;
 
   if (display === 'check' || display === 'inline-check') {
@@ -113,11 +113,6 @@ const OptionsType: FunctionComponent<OptionsTypeProps<any>> & {
   return null;
 };
 
-OptionsType.defaultProps = {
-  knob: {} as any,
-  display: 'select',
-  onChange: (value) => value,
-};
 
 OptionsType.propTypes = {
   knob: PropTypes.shape({
