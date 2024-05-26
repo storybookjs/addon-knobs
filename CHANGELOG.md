@@ -1,3 +1,20 @@
+# v7.1.0 (Sun May 26 2024)
+
+#### 🚀 Enhancement
+
+- fix release build step [#58](https://github.com/storybookjs/addon-knobs/pull/58) ([@literalpie](https://github.com/literalpie))
+
+#### 🐛 Bug Fix
+
+- Update Node and other build changes [#57](https://github.com/storybookjs/addon-knobs/pull/57) ([@literalpie](https://github.com/literalpie))
+- Storybook 8 support [#56](https://github.com/storybookjs/addon-knobs/pull/56) ([@literalpie](https://github.com/literalpie))
+
+#### Authors: 1
+
+- Benjamin Kindle ([@literalpie](https://github.com/literalpie))
+
+---
+
 # v7.0.2 (Thu Apr 27 2023)
 
 #### 🐛 Bug Fix
