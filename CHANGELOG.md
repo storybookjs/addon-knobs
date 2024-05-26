@@ -1,3 +1,19 @@
+# v7.1.1 (Sun May 26 2024)
+
+#### 🐛 Bug Fix
+
+- Revert 8.0 changes [#59](https://github.com/storybookjs/addon-knobs/pull/59) ([@literalpie](https://github.com/literalpie))
+
+#### 🏠 Internal
+
+- Update-auto [#61](https://github.com/storybookjs/addon-knobs/pull/61) ([@literalpie](https://github.com/literalpie))
+
+#### Authors: 1
+
+- Benjamin Kindle ([@literalpie](https://github.com/literalpie))
+
+---
+
 # v7.1.0 (Sun May 26 2024)
 
 #### 🚀 Enhancement
