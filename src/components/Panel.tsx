@@ -14,7 +14,7 @@ import {
   Link,
   ScrollArea,
 } from '@storybook/components';
-import { API } from '@storybook/api';
+import { API } from '@storybook/manager-api';
 import { RESET, SET, CHANGE, SET_OPTIONS, CLICK } from '../shared';
 
 import { getKnobControl } from './types';
@@ -283,7 +283,7 @@ export default class KnobPanel extends PureComponent<KnobPanelProps> {
             <TabsState>
               {entries.map(([k, v]) => (
                 <div id={k} key={k} title={v.title}>
-                  {v.render}
+                  {v.render as unknown as ReactNode}
                 </div>
               ))}
             </TabsState>
