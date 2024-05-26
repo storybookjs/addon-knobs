@@ -1,4 +1,4 @@
-import { makeDecorator, addons } from '@storybook/preview-api';
+import { makeDecorator, addons } from '@storybook/addons';
 
 import { SET_OPTIONS } from './shared';
 import { manager, registerKnobs } from './registerKnobs';

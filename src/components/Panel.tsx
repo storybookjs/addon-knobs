@@ -14,7 +14,7 @@ import {
   Link,
   ScrollArea,
 } from '@storybook/components';
-import { API } from '@storybook/manager-api';
+import { API } from '@storybook/api';
 import { RESET, SET, CHANGE, SET_OPTIONS, CLICK } from '../shared';
 
 import { getKnobControl } from './types';

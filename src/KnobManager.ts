@@ -3,6 +3,7 @@
 // navigator exists in Jest but not the browser. global exists in the browser but not Jest
 import { navigator as gNavigator, global } from 'global';
 import escape from 'escape-html';
+import { getQueryParams } from '@storybook/preview-api';
 import { Channel } from '@storybook/channels';
 
 import KnobStore, { KnobStoreKnob } from './KnobStore';
@@ -13,17 +14,15 @@ import { deserializers } from './converters';
 
 const navigator: Navigator = gNavigator || global.navigator;
 
-const knobValuesFromUrl: Record<string, string> = {};
-// getQueryParams is now a part of the manager storybookApi. We don't have a way to access that here.
-// Object.entries(getQueryParams()).reduce(
-//   (acc, [k, v]) => {
-//     if (k.includes('knob-')) {
-//       return { ...acc, [k.replace('knob-', '')]: v };
-//     }
-//     return acc;
-//   },
-//   {}
-// );
+const knobValuesFromUrl: Record<string, string> = Object.entries(getQueryParams()).reduce(
+  (acc, [k, v]) => {
+    if (k.includes('knob-')) {
+      return { ...acc, [k.replace('knob-', '')]: v };
+    }
+    return acc;
+  },
+  {}
+);
 
 // This is used by _mayCallChannel to determine how long to wait to before triggering a panel update
 const PANEL_UPDATE_INTERVAL = 400;
