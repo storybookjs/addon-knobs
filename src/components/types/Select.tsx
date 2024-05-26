@@ -28,7 +28,7 @@ const deserialize = (value: SelectTypeKnobValue) => value;
 const SelectType: FunctionComponent<SelectTypeProps> & {
   serialize: typeof serialize;
   deserialize: typeof deserialize;
-} = ({ knob = {} as any, onChange = (value)=>value }) => {
+} = ({ knob, onChange }) => {
   const { options } = knob;
 
   const callbackReduceArrayOptions = (acc: any, option: any, i: number) => {
@@ -65,6 +65,11 @@ const SelectType: FunctionComponent<SelectTypeProps> & {
       ))}
     </Form.Select>
   );
+};
+
+SelectType.defaultProps = {
+  knob: {} as any,
+  onChange: (value) => value,
 };
 
 SelectType.propTypes = {

@@ -29,7 +29,7 @@ const deserialize = (value: string | null) => value === 'true';
 const BooleanType: FunctionComponent<BooleanTypeProps> & {
   serialize: typeof serialize;
   deserialize: typeof deserialize;
-} = ({ knob = {} as any, onChange = (value)=>value }) => (
+} = ({ knob, onChange }) => (
   <Input
     id={knob.name}
     name={knob.name}
@@ -38,6 +38,11 @@ const BooleanType: FunctionComponent<BooleanTypeProps> & {
     checked={knob.value || false}
   />
 );
+
+BooleanType.defaultProps = {
+  knob: {} as any,
+  onChange: (value) => value,
+};
 
 BooleanType.propTypes = {
   knob: PropTypes.shape({

@@ -34,7 +34,7 @@ const deserialize = (): undefined => undefined;
 const FilesType: FunctionComponent<FilesTypeProps> & {
   serialize: typeof serialize;
   deserialize: typeof deserialize;
-} = ({ knob = {} as any, onChange = (value)=>value }) => (
+} = ({ knob, onChange }) => (
   <FileInput
     type="file"
     name={knob.name}
@@ -48,6 +48,11 @@ const FilesType: FunctionComponent<FilesTypeProps> & {
     size="flex"
   />
 );
+
+FilesType.defaultProps = {
+  knob: {} as any,
+  onChange: (value) => value,
+};
 
 FilesType.propTypes = {
   knob: PropTypes.shape({

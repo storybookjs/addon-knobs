@@ -24,12 +24,9 @@
     "build": "concurrently \"npm run buildBabel\" \"npm run buildTsc\"",
     "test": "jest",
     "storybook": "storybook dev -p 6006",
-    "start": "concurrently \"npm run storybook -- --quiet\" \"npm run build -- --watch\"",
+    "start": "concurrently \"npm run storybook -- --no-manager-cache --quiet\" \"npm run build -- --watch\"",
     "build-storybook": "storybook build",
     "release": "npm run build && auto shipit"
-  },
-  "resolutions": {
-    "jackspeak": "2.1.1"
   },
   "dependencies": {
     "copy-to-clipboard": "^3.3.3",
@@ -61,11 +58,11 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/escape-html": "^1.0.2",
     "@types/lodash": "^4.14.191",
-    "@types/node": "^20.12.12",
+    "@types/node": "^18.15.11",
     "@types/react-lifecycles-compat": "^3.0.1",
     "@types/react-select": "^3.1.2",
     "@types/webpack-env": "^1.18.0",
-    "auto": "^11.1.6",
+    "auto": "^10.43.0",
     "chalk": "^5.2.0",
     "concurrently": "^7.6.0",
     "jest": "^29.5.0",
