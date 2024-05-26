@@ -19,11 +19,16 @@ const deserialize = (): undefined => undefined;
 const ButtonType: FunctionComponent<ButtonTypeProps> & {
   serialize: typeof serialize;
   deserialize: typeof deserialize;
-} = ({ knob = {} as any, onClick = ()=>{} }) => (
+} = ({ knob, onClick }) => (
   <Form.Button type="button" name={knob.name} onClick={() => onClick(knob)}>
     {knob.name}
   </Form.Button>
 );
+
+ButtonType.defaultProps = {
+  knob: {} as any,
+  onClick: () => {},
+};
 
 ButtonType.propTypes = {
   knob: PropTypes.shape({

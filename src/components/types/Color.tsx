@@ -4,7 +4,7 @@ import React, { Component, Validator } from 'react';
 import { RgbaStringColorPicker } from 'react-colorful';
 
 import { styled } from '@storybook/theming';
-import { Button } from '@storybook/components';
+import { Form } from '@storybook/components';
 import { KnobControlConfig, KnobControlProps } from './types';
 
 type ColorTypeKnobValue = string;
@@ -22,6 +22,8 @@ interface ColorButtonProps {
   active: boolean;
   onClick: () => any;
 }
+
+const { Button } = Form;
 
 const Swatch = styled.div<{}>(({ theme }) => ({
   position: 'absolute',
@@ -121,7 +123,7 @@ export default class ColorType extends Component<ColorTypeProps, ColorTypeState>
         type="button"
         name={knob.name}
         onClick={this.handleClick}
-        size="small"
+        size="flex"
       >
         {knob.value && knob.value.toUpperCase()}
         <Swatch style={colorStyle} />

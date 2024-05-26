@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'ci skip') && !contains(github.event.head_commit.message, 'skip ci')"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
 
       - name: Prepare repository
         run: |
@@ -15,10 +15,10 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "bot@github.com"
 
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
         with:
-          node-version: 20.x
+          node-version: 16.x
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
