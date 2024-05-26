@@ -1,3 +1,15 @@
+# v8.0.0 (Sun May 26 2024)
+
+#### 💥 Breaking Change
+
+- Storybook 8.0 support [#60](https://github.com/storybookjs/addon-knobs/pull/60) ([@literalpie](https://github.com/literalpie))
+
+#### Authors: 1
+
+- Benjamin Kindle ([@literalpie](https://github.com/literalpie))
+
+---
+
 # v7.1.1 (Sun May 26 2024)
 
 #### 🐛 Bug Fix
