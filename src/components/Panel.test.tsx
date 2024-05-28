@@ -7,7 +7,7 @@ import { ThemeProvider, themes, convert } from '@storybook/theming';
 import Panel, { DEFAULT_GROUP_ID } from './Panel';
 import { CHANGE, SET } from '../shared';
 import PropForm from './PropForm';
-import { API } from '@storybook/api';
+import { API } from '@storybook/manager-api';
 
 type CreateMocked<Type> = {
   [Property in keyof Type]: jest.Mock & Type[Property];
@@ -16,7 +16,7 @@ type CreateMocked<Type> = {
 const createTestApi = (): CreateMocked<
   Pick<API, 'on' | 'off' | 'emit' | 'getQueryParam' | 'setQueryParams'>
 > => ({
-  on: jest.fn(() => () => {}),
+  on: jest.fn(() => () => { }),
   off: jest.fn(),
   emit: jest.fn(),
   getQueryParam: jest.fn(() => undefined),
@@ -56,7 +56,7 @@ describe('Panel', () => {
       const testApi = {
         on: (e, handler) => {
           handlers[e] = handler;
-          return () => {};
+          return () => { };
         },
         off: jest.fn(),
         emit: jest.fn(),
@@ -99,7 +99,7 @@ describe('Panel', () => {
       const testApi = {
         getQueryParam: jest.fn(),
         setQueryParams: jest.fn(() => undefined),
-        on: jest.fn(() => () => {}),
+        on: jest.fn(() => () => { }),
         off: jest.fn(),
         emit: jest.fn(),
       };
@@ -126,7 +126,7 @@ describe('Panel', () => {
       emit: jest.fn(),
       getQueryParam: jest.fn(() => undefined),
       setQueryParams: jest.fn(),
-      on: jest.fn(() => () => {}),
+      on: jest.fn(() => () => { }),
     };
 
     it.skip('should have no tabs when there are no groupIds', () => {
