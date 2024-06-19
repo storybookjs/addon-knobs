@@ -1,3 +1,15 @@
+# v8.0.1 (Wed Jun 19 2024)
+
+#### 🐛 Bug Fix
+
+- replace @storybook/api with @storybook/manager-api [#62](https://github.com/storybookjs/addon-knobs/pull/62) (tim.lee@nintex.com)
+
+#### Authors: 1
+
+- Timothy Lee ([@tetslee](https://github.com/tetslee))
+
+---
+
 # v8.0.0 (Sun May 26 2024)
 
 #### 💥 Breaking Change
