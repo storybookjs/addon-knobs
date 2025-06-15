@@ -3,7 +3,7 @@
 // navigator exists in Jest but not the browser. global exists in the browser but not Jest
 import { navigator as gNavigator, global } from 'global';
 import escape from 'escape-html';
-import { Channel } from '@storybook/channels';
+import { Channel } from 'storybook/internal/channels';
 
 import KnobStore, { KnobStoreKnob } from './KnobStore';
 import { Knob, KnobType, Mutable } from './type-defs';

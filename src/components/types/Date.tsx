@@ -1,7 +1,7 @@
 import React, { Component, ChangeEvent, Validator } from 'react';
 import PropTypes from 'prop-types';
-import { styled } from '@storybook/theming';
-import { Form } from '@storybook/components';
+import { styled } from 'storybook/theming';
+import { Form } from 'storybook/internal/components';
 import { KnobControlConfig, KnobControlProps } from './types';
 
 type DateTypeKnobValue = number;

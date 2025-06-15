@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { FunctionComponent, Validator } from 'react';
 
-import { styled } from '@storybook/theming';
+import { styled } from 'storybook/theming';
 import { KnobControlConfig, KnobControlProps } from './types';
 
 type BooleanTypeKnobValue = boolean;

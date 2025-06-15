@@ -2,7 +2,7 @@ import React, { Component, ChangeEvent, Validator } from 'react';
 import PropTypes from 'prop-types';
 import deepEqual from 'fast-deep-equal';
 import { polyfill } from 'react-lifecycles-compat';
-import { Form } from '@storybook/components';
+import { Form } from 'storybook/internal/components';
 import { KnobControlConfig, KnobControlProps } from './types';
 
 export type ObjectTypeKnob<T> = KnobControlConfig<T>;

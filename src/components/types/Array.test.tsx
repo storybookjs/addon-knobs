@@ -1,7 +1,7 @@
 import React from 'react';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ThemeProvider, themes, convert } from '@storybook/theming';
+import { ThemeProvider, themes, convert } from 'storybook/theming';
 import ArrayType from './Array';
 
 describe('Array', () => {

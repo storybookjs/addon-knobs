@@ -2,10 +2,10 @@ import React, { PureComponent, Fragment, Validator, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import qs from 'qs';
 import { document } from 'global';
-import { styled } from '@storybook/theming';
+import { styled } from 'storybook/theming';
 import copy from 'copy-to-clipboard';
 
-import { STORY_CHANGED } from '@storybook/core-events';
+import { STORY_CHANGED } from 'storybook/internal/core-events';
 import {
   Placeholder,
   TabWrapper,
@@ -13,8 +13,8 @@ import {
   ActionBar,
   Link,
   ScrollArea,
-} from '@storybook/components';
-import { API } from '@storybook/manager-api';
+} from 'storybook/internal/components';
+import { API } from 'storybook/manager-api';
 import { RESET, SET, CHANGE, SET_OPTIONS, CLICK } from '../shared';
 
 import { getKnobControl } from './types';

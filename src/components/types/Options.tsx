@@ -1,7 +1,7 @@
 import React, { FunctionComponent, Validator } from 'react';
 import PropTypes from 'prop-types';
 import ReactSelect from 'react-select';
-import { styled } from '@storybook/theming';
+import { styled } from 'storybook/theming';
 import { KnobControlConfig, KnobControlProps } from './types';
 
 import RadiosType from './Radio';

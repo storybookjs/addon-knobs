@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { ThemeProvider, themes, convert } from '@storybook/theming';
+import { ThemeProvider, themes, convert } from 'storybook/theming';
 import SelectType from './Select';
 
 describe('Select', () => {

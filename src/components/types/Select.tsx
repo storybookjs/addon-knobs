@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ChangeEvent, Validator } from 'react';
 import PropTypes from 'prop-types';
 
-import { Form } from '@storybook/components';
+import { Form } from 'storybook/internal/components';
 import { KnobControlConfig, KnobControlProps } from './types';
 
 export type SelectTypeKnobValue = string | number | boolean | null | undefined | PropertyKey[] | Record<string, unknown>;

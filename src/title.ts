@@ -1,4 +1,4 @@
-import { API } from '@storybook/manager-api';
+import { API } from 'storybook/manager-api';
 import { SET } from './shared';
 import { KnobStoreKnob } from './KnobStore';
 
