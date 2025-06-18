@@ -32,6 +32,7 @@
     "jackspeak": "2.1.1"
   },
   "dependencies": {
+    "@types/qs": "^6.9.11",
     "copy-to-clipboard": "^3.3.3",
     "core-js": "^3.29.0",
     "escape-html": "^1.0.3",
@@ -52,8 +53,8 @@
     "@babel/preset-typescript": "^7.21.0",
     "@emotion/jest": "^11.10.5",
     "@storybook/addon-webpack5-compiler-babel": "^3.0.0",
-    "@storybook/react": "^8.0.0",
-    "@storybook/react-webpack5": "^8.0.0",
+    "@storybook/react": "^9.0.0",
+    "@storybook/react-webpack5": "^9.0.0",
     "@testing-library/dom": "^9.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
@@ -76,8 +77,8 @@
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
+    "react": ">16.0.0",
+    "react-dom": ">16.0.0"
   },
   "peerDependenciesMeta": {
     "react": {
