@@ -1,13 +1,13 @@
 import React from 'react';
 import { act, render, screen } from '@testing-library/react';
-import { STORY_CHANGED } from '@storybook/core-events';
-import { TabsState } from '@storybook/components';
+import { STORY_CHANGED } from 'storybook/internal/core-events';
+import { TabsState } from 'storybook/internal/components';
 
-import { ThemeProvider, themes, convert } from '@storybook/theming';
+import { ThemeProvider, themes, convert } from 'storybook/theming';
 import Panel, { DEFAULT_GROUP_ID } from './Panel';
 import { CHANGE, SET } from '../shared';
 import PropForm from './PropForm';
-import { API } from '@storybook/manager-api';
+import { API } from 'storybook/manager-api';
 
 type CreateMocked<Type> = {
   [Property in keyof Type]: jest.Mock & Type[Property];

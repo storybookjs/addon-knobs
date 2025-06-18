@@ -1,9 +1,9 @@
 import { FileReader } from 'global';
 import PropTypes, { Validator } from 'prop-types';
 import React, { ChangeEvent, FunctionComponent } from 'react';
-import { styled } from '@storybook/theming';
+import { styled } from 'storybook/theming';
 
-import { Form } from '@storybook/components';
+import { Form } from 'storybook/internal/components';
 import { KnobControlConfig, KnobControlProps } from './types';
 
 type DateTypeKnobValue = string[];

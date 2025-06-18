@@ -1,5 +1,5 @@
-import { useEffect, addons } from '@storybook/preview-api';
-import { STORY_CHANGED, FORCE_RE_RENDER } from '@storybook/core-events';
+import { useEffect, addons } from 'storybook/preview-api';
+import { STORY_CHANGED, FORCE_RE_RENDER } from 'storybook/internal/core-events';
 import debounce from 'lodash/debounce';
 
 import KnobManager from './KnobManager';

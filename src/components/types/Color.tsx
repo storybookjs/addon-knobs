@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import React, { Component, Validator } from 'react';
 import { RgbaStringColorPicker } from 'react-colorful';
 
-import { styled } from '@storybook/theming';
-import { Button } from '@storybook/components';
+import { styled } from 'storybook/theming';
+import { Button } from 'storybook/internal/components';
 import { KnobControlConfig, KnobControlProps } from './types';
 
 type ColorTypeKnobValue = string;

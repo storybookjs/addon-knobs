@@ -1,7 +1,7 @@
 import React, { Component, ComponentType, Validator } from 'react';
 import PropTypes from 'prop-types';
 
-import { Form } from '@storybook/components';
+import { Form } from 'storybook/internal/components';
 import { getKnobControl } from './types';
 import { KnobStoreKnob } from '../KnobStore';
 

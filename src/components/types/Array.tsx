@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { ChangeEvent, Component, Validator } from 'react';
 
-import { Form } from '@storybook/components';
+import { Form } from 'storybook/internal/components';
 import { KnobControlConfig, KnobControlProps } from './types';
 
 export type ArrayTypeKnobValue = string[] | readonly string[];

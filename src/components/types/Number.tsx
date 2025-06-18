@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component, ChangeEvent, Validator } from 'react';
 
-import { styled } from '@storybook/theming';
-import { Form } from '@storybook/components';
+import { styled } from 'storybook/theming';
+import { Form } from 'storybook/internal/components';
 import { KnobControlConfig, KnobControlProps } from './types';
 
 type NumberTypeKnobValue = number;
